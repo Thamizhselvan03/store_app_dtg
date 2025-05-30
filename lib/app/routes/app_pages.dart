@@ -3,6 +3,10 @@ import 'package:get/get.dart';
 import '../components/navbar/fixed_bottom_navbar.dart';
 import '../components/navbar/floating_bottom_navbar.dart';
 import '../components/navbar/navbar_binding.dart';
+import '../modules/customer/customer_home/bindings/customer_home_binding.dart';
+import '../modules/customer/customer_home/views/customer_home_view.dart';
+import '../modules/customer/customer_products_list/bindings/customer_products_list_binding.dart';
+import '../modules/customer/customer_products_list/views/customer_products_list_view.dart';
 import '../modules/customer/login/bindings/login_binding.dart';
 import '../modules/customer/login/views/login_view.dart';
 import '../modules/example/home-with-graphql/bindings/graphql_binding.dart';
@@ -26,6 +30,8 @@ class AppPages {
   static const HOME = Routes.HOME;
   static const POST_DETAIL = Routes.POST_DETAIL;
   static const Login = Routes.LOGIN;
+  static const CUSTOMER_HOME = Routes.CUSTOMER_HOME;
+  static const CUSTOMER_PRODUCTS_LIST = Routes.CUSTOMER_PRODUCTS_LIST;
 
   static final routes = [
     /// NAV BARs
@@ -65,6 +71,16 @@ class AppPages {
       name: _Paths.LOGIN,
       page: () => const LoginView(),
       binding: LoginBinding(),
+    ),
+    GetPage(
+      name: _Paths.CUSTOMER_HOME,
+      page: () => const CustomerHomeView(),
+      binding: CustomerHomeBinding(),
+    ),
+    GetPage(
+      name: _Paths.CUSTOMER_PRODUCTS_LIST,
+      page: () => const CustomerProductsListView(),
+      binding: CustomerProductsListBinding(),
     ),
   ];
 }

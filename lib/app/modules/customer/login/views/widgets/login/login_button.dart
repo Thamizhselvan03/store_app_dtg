@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:store_app/app/modules/customer/login/views/widgets/otp_screen.dart';
 
 import 'package:store_app/config/extensions/context_extensions.dart';
 
 import '../../../../../../components/common/animations/animate_do.dart';
 import '../../../../../../components/common/style/fonts/font_weight_helper.dart';
+import '../../../../../../components/common/toast/show_toast.dart';
 import '../../../../../../components/common/widgets/custom_linear_button.dart';
 import '../../../../../../components/common/widgets/text_app.dart';
+import '../../../../../../routes/app_pages.dart';
+import '../../../controllers/login_controller.dart';
 
 class LoginButton extends StatelessWidget {
   const LoginButton({super.key});
@@ -23,7 +28,8 @@ class LoginButton extends StatelessWidget {
         },
         child: TextApp(
           text: "Send OTP",
-          theme: context.textStyle.copyWith(
+          theme: context.textTheme.displaySmall!.copyWith(
+            color: Colors.white,
             fontSize: 18.sp,
             fontWeight: FontWeightHelper.bold,
           ),
@@ -81,6 +87,13 @@ class LoginButton extends StatelessWidget {
   }
 
   void _validateThenDoLogin(BuildContext context) {
+    final LoginController _ctlr = Get.find<LoginController>();
+
+    if (_ctlr.formKey.currentState!.validate()) {
+     Get.to(OtpScreen());
+    } else {
+      ShowToast.showToastErrorTop(message: "Enter valid number");
+    }
     // if (context.read<AuthBloc>().formKey.currentState!.validate()) {
     //   context.pushNamed(AppRoutes.otp);
     // }

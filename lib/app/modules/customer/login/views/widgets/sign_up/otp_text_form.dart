@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
 import 'package:store_app/config/extensions/context_extensions.dart';
 
 import '../../../../../../components/common/style/colors/colors_light.dart';
 import '../../../../../../components/common/style/fonts/font_weight_helper.dart';
+import '../../../controllers/login_controller.dart';
 
 
 
@@ -54,12 +56,12 @@ class _OtpTextFormState extends State<OtpTextForm> {
         border: Border.all(color: Colors.transparent),
       ),
     );
-
+    final LoginController _ctlr = Get.find<LoginController>();
     return SizedBox(
       // height: 68.h,
       child: Pinput(
         length: length,
-        controller:TextEditingController(),
+        controller:_ctlr.otpController,
         focusNode: focusNode,
         defaultPinTheme: defaultPinTheme,
         validator: (s) {

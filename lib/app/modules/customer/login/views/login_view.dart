@@ -25,7 +25,7 @@ class LoginView extends GetView<LoginController> {
             ),
             SizedBox(height: 30.h),
             // Login TextForm
-            const LoginTextForm(),
+             LoginTextForm(),
             SizedBox(height: 30.h),
             // Login Button
             const LoginButton(),

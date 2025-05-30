@@ -12,7 +12,9 @@ abstract class Routes {
   static const POST_DETAIL = _Paths.POST_DETAIL;
   static const GRAPHQL = _Paths.GRAPHQL;
   static const ONBOARDING = _Paths.ONBOARDING;
-  static const LOGIN =  _Paths.LOGIN;
+  static const LOGIN = _Paths.LOGIN;
+  static const CUSTOMER_HOME = _Paths.CUSTOMER_HOME;
+  static const CUSTOMER_PRODUCTS_LIST = _Paths.CUSTOMER_PRODUCTS_LIST;
 }
 
 abstract class _Paths {
@@ -25,4 +27,6 @@ abstract class _Paths {
   static const GRAPHQL = '/graphql';
   static const ONBOARDING = '/onboarding';
   static const LOGIN = '/login';
+  static const CUSTOMER_HOME = '/customer-home';
+  static const CUSTOMER_PRODUCTS_LIST = '/customer-products-list';
 }

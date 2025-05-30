@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:store_app/app/routes/app_pages.dart';
 import 'package:store_app/config/extensions/context_extensions.dart';
 
 import '../../../../../../components/common/animations/animate_do.dart';
@@ -18,7 +19,7 @@ class OtpButton extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: 50.w,
         onPressed: () {
-          //context.pushNamed(AppRoutes.homeCustomer);
+          context.pushNamed(AppPages.CUSTOMER_HOME);
         },
         child: TextApp(
           text: 'Next',

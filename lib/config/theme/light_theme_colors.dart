@@ -27,9 +27,9 @@ class LightThemeColors {
   static const Color buttonBorderColor = Color(0xffE7E7E7);
 
   //TEXT
-  static const Color bodyTextColor = primaryColor;
+  static const Color bodyTextColor = Colors.black;
   static Color bodyTextSecondaryColor = bodyTextColor.withOpacity(.65);
-  static const Color headlinesTextColor = primaryColor;
+  static const Color headlinesTextColor = Colors.black;
   static const Color captionTextColor = Colors.grey;
   static const Color hintTextColor = Color(0xff686868);
 

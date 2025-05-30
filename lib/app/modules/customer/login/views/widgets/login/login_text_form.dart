@@ -1,37 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:get/get.dart';
+import 'package:store_app/app/modules/customer/login/controllers/login_controller.dart';
 
 import '../../../../../../components/common/animations/animate_do.dart';
 import '../../../../../../components/common/widgets/custom_text_field.dart';
 
 class LoginTextForm extends StatefulWidget {
-  const LoginTextForm({super.key});
+   LoginTextForm({super.key});
 
   @override
   State<LoginTextForm> createState() => _LoginTextFormState();
 }
 
 class _LoginTextFormState extends State<LoginTextForm> {
-  bool isShowPassword = false;
-
-  @override
-  void initState() {
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    // _bloc.phoneNoController.dispose();
-
-    super.dispose();
-  }
+  //
+  final LoginController _ctlr = Get.find<LoginController>();
 
   @override
   Widget build(BuildContext context) {
+
     return Form(
-    //  key: _bloc.formKey,
+      key: _ctlr.formKey,
       child: Column(
         children: [
           SizedBox(height: 20.h),
@@ -41,10 +31,10 @@ class _LoginTextFormState extends State<LoginTextForm> {
             child: CustomTextField(
               filled: true,
               fillColour: const Color(0xFFF5FCF9),
-              controller: TextEditingController(),
-              hintText:'Phone number',
+              controller: _ctlr.phoneNoController,
+              hintText: 'Phone number',
               keyboardType: TextInputType.number,
-              obscureText: isShowPassword,
+              obscureText: false,
 
               validator: (value) {
                 if (value == null || value.isEmpty || value.length < 10) {

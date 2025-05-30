@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import 'package:store_app/config/extensions/context_extensions.dart';
 
@@ -40,7 +41,7 @@ class AuthTittleInfo extends StatelessWidget {
           //description
           TextApp(
             text: description,
-            theme: context.textStyle.copyWith(
+            theme: context.textTheme.bodyMedium!.copyWith(
               fontSize: 14.sp,
 
               fontWeight: FontWeightHelper.medium,
