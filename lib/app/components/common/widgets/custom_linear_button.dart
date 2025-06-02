@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:store_app/config/extensions/context_extensions.dart';
 
 class CustomLinearButton extends StatelessWidget {
   const CustomLinearButton({
@@ -21,7 +20,7 @@ class CustomLinearButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      splashColor: context.theme.primaryColor!.withValues(alpha: 0.3),
+      splashColor: context.theme.primaryColor.withValues(alpha: 0.3),
       onTap: onPressed,
       child: Container(
         height: height ?? 44.h,
