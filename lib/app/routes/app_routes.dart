@@ -15,6 +15,12 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const CUSTOMER_HOME = _Paths.CUSTOMER_HOME;
   static const CUSTOMER_PRODUCTS_LIST = _Paths.CUSTOMER_PRODUCTS_LIST;
+  static const INVENTORY_TRACKING = _Paths.INVENTORY_TRACKING;
+  static const PRODUCT_MANAGEMENT = _Paths.PRODUCT_MANAGEMENT;
+  static const DASHBOARD = _Paths.DASHBOARD;
+  static const SALES_HISTORY = _Paths.SALES_HISTORY;
+  static const REPORTS = _Paths.REPORTS;
+  static const ADMIN_MAIN =  _Paths.ADMIN_MAIN;
 }
 
 abstract class _Paths {
@@ -29,4 +35,10 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const CUSTOMER_HOME = '/customer-home';
   static const CUSTOMER_PRODUCTS_LIST = '/customer-products-list';
+  static const INVENTORY_TRACKING = '/inventory-tracking';
+  static const PRODUCT_MANAGEMENT = '/product-management';
+  static const DASHBOARD = '/dashboard';
+  static const SALES_HISTORY = '/sales-history';
+  static const REPORTS = '/reports';
+  static const ADMIN_MAIN = '/admin-main';
 }

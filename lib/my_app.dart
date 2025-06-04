@@ -20,7 +20,7 @@ class MyApp extends GetView {
       rebuildFactor: (old, data) => true,
       builder: (context, widget) {
         return GetMaterialApp(
-          title: "GetXStandard",
+          title: "Store app",
           useInheritedMediaQuery: true,
           debugShowCheckedModeBanner: false,
 
@@ -36,7 +36,7 @@ class MyApp extends GetView {
             );
           },
 
-          initialRoute: AppPages.Login,
+          initialRoute: AppPages.CUSTOMER_HOME,
           // first screen to show when app is running
 
           defaultTransition: Transition.circularReveal,

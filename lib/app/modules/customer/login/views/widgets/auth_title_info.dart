@@ -14,6 +14,7 @@ class AuthTittleInfo extends StatelessWidget {
     required this.description,
     super.key,
   });
+
   final String title;
   final String description;
 
@@ -25,7 +26,7 @@ class AuthTittleInfo extends StatelessWidget {
         children: [
           //app logo
           Image.network(
-            "https://i.postimg.cc/nz0YBQcH/Logo-light.png",
+            "https://static.vecteezy.com/system/resources/previews/008/321/373/non_2x/shopping-bag-logo-store-icon-online-shop-symbol-template-vector.jpg",
             height: 100,
           ),
           SizedBox(height: 70.h),

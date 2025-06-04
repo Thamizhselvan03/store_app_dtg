@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:store_app/app/modules/customer/login/views/widgets/sign_up/otp_button.dart';
-import 'package:store_app/app/modules/customer/login/views/widgets/sign_up/otp_text_form.dart';
 import 'package:store_app/config/extensions/context_extensions.dart';
 
 import '../../../../../components/common/animations/animate_do.dart';
 import '../../../../../components/common/style/fonts/font_weight_helper.dart';
 import '../../../../../components/common/widgets/text_app.dart';
 import 'auth_title_info.dart';
+import 'otp_screen/otp_button.dart';
+import 'otp_screen/otp_text_form.dart';
 
 class OtpScreen extends StatelessWidget {
   const OtpScreen({super.key});
