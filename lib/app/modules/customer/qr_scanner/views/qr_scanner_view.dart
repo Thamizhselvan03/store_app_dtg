@@ -1,0 +1,120 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'package:get/get.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:store_app/app/components/common/widgets/text_app.dart';
+import 'package:store_app/app/components/global-widgets/main_appbar.dart';
+import 'package:store_app/app/routes/app_pages.dart';
+import 'package:store_app/config/extensions/context_extensions.dart';
+
+import '../controllers/qr_scanner_controller.dart';
+
+class QrScannerView extends GetView<QrScannerController> {
+ const  QrScannerView({super.key});
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    MobileScannerController scannerController = MobileScannerController();
+    final QrScannerController _ctrl=Get.put(QrScannerController());
+    return Scaffold(
+      appBar: MainAppBar(prefixAction: () {}, title: "Scan Map QR"),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 15.w),
+        child: Column(
+          spacing: 5.h,
+          children: [
+            SizedBox(height: 20.h),
+            Center(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * .8,
+                  height: MediaQuery.of(context).size.height * .4,
+
+                  child: MobileScanner(
+                    fit: BoxFit.cover,
+                    onDetect: (capture) {
+                      final List<Barcode> barcodes = capture.barcodes;
+                      if (barcodes.isNotEmpty) {
+                        final String code = barcodes.first.rawValue ?? "---";
+                        _ctrl.setScannedCode(code);
+                        // Stop the camera
+                        scannerController.stop();
+                        Get.snackbar("QR Code", code);
+
+                        context.pushNamed(AppPages.CUSTOMER_HOME);
+                       // Get.snackbar("QR Code", code);
+                      }
+                    },
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 10.h),
+            TextApp(
+              text: "Scan the Qr code Load the Map",
+              theme: context.textTheme.bodyLarge!,
+            ),
+
+            Text(
+              'After that you can select your grocery list',
+              style: context.textTheme.bodyMedium!.copyWith(
+                color: context.theme.hintColor,
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w500,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 10),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextApp(
+                text: "Recently Visited Maps",
+                theme: context.textTheme.titleLarge!.copyWith(fontSize: 17.sp),
+                textAlign: TextAlign.left,
+              ),
+            ),
+
+            Expanded(
+              child: ListView.builder(
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadiusGeometry.circular(10.r),
+                    ),
+                    child: ListTile(
+                      minTileHeight: 60.h,
+                      leading: CachedNetworkImage(
+                        height: 50,
+                        width: 50,
+                        imageUrl:
+                            'https://img.freepik.com/free-vector/shop-with-sign-we-are-open_23-2148547718.jpg?semt=ais_hybrid&w=740',
+                      ),
+                      title: TextApp(
+                        text: "Greens",
+                        theme: context.textTheme.bodyLarge!,
+                      ),
+
+                      trailing: IconButton(
+                        constraints: BoxConstraints.tight(Size.fromWidth(20)),
+
+                        onPressed: () {},
+                        icon: Icon(Icons.more_vert),
+                        color: context.theme.hintColor,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

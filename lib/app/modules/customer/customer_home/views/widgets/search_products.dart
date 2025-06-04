@@ -17,20 +17,19 @@ class SearchProducts extends StatelessWidget {
         controller: _ctrl.searchController,
         keyboardType: TextInputType.emailAddress,
         filled: true,
-        fillColour: const Color(0xFFF5FCF9),
+        fillColour: Colors.white,
         hintText: 'Search for products',
-        onChanged: (value) {
-
-        },
-        suffixIcon: Obx(() =>
-           IconButton(
-            icon: Icon(_ctrl.isListening.value
-                ? Icons.mic
-                : Icons.mic_none,color: context.theme.primaryColor,),
-            onPressed:  _ctrl.isListening.value
+        onChanged: (value) {},
+        suffixIcon: Obx(
+          () => IconButton(
+            icon: Icon(
+              _ctrl.isListening.value ? Icons.mic : Icons.mic_none,
+              color: context.theme.primaryColor,
+            ),
+            onPressed: _ctrl.isListening.value
                 ? _ctrl.stopListening
                 : _ctrl.startListening,
-          )
+          ),
         ),
         // suffixIcon: IconButton(
         //   onPressed: () {

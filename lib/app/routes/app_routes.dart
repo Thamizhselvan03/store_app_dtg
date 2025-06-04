@@ -20,7 +20,11 @@ abstract class Routes {
   static const DASHBOARD = _Paths.DASHBOARD;
   static const SALES_HISTORY = _Paths.SALES_HISTORY;
   static const REPORTS = _Paths.REPORTS;
-  static const ADMIN_MAIN =  _Paths.ADMIN_MAIN;
+  static const ADMIN_MAIN = _Paths.ADMIN_MAIN;
+  static const CUSTOMERS_HOME = _Paths.CUSTOMERS_HOME;
+  static const CUST_GROCERY_LIST = _Paths.CUST_GROCERY_LIST;
+  static const CUST_GROCERY_LIST_ITEMS = _Paths.CUST_GROCERY_LIST_ITEMS;
+  static const QR_SCANNER = _Paths.QR_SCANNER;
 }
 
 abstract class _Paths {
@@ -41,4 +45,8 @@ abstract class _Paths {
   static const SALES_HISTORY = '/sales-history';
   static const REPORTS = '/reports';
   static const ADMIN_MAIN = '/admin-main';
+  static const CUSTOMERS_HOME = '/customers-home';
+  static const CUST_GROCERY_LIST = '/cust-grocery-list';
+  static const CUST_GROCERY_LIST_ITEMS = '/cust-grocery-list-items';
+  static const QR_SCANNER = '/qr-scanner';
 }

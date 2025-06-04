@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
@@ -7,30 +8,26 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MainAppBar({
     super.key,
     required this.prefixAction,
-    required this.suffixAction,
+    required this.title,  this.suffix,
   });
+
   final VoidCallback prefixAction;
-  final VoidCallback suffixAction;
+
+  final String title;
+  final List<Widget>? suffix;
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text('GetX Standard'),
+      title: Text(title),
       leading: IconButton(
         onPressed: prefixAction,
         icon: Icon(
-          Get.isDarkMode ? Iconsax.moon5 : Iconsax.moon5,
+          Get.isDarkMode ? Iconsax.backward : CupertinoIcons.back,
           color: Get.isDarkMode ? Colors.white : Colors.black,
         ),
       ),
-      actions: [
-        IconButton(
-          onPressed: suffixAction,
-          icon: const Icon(
-            IconlyBold.graph,
-            color: Colors.white,
-          ),
-        ),
-      ],
+      actions:suffix,
       centerTitle: true,
     );
   }

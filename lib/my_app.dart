@@ -36,10 +36,10 @@ class MyApp extends GetView {
             );
           },
 
-          initialRoute: AppPages.CUSTOMER_HOME,
+          initialRoute: AppPages.FLOATING_NAV,
           // first screen to show when app is running
 
-          defaultTransition: Transition.circularReveal,
+          defaultTransition: Transition.fadeIn,
 
           getPages: AppPages.routes,
           // app screens

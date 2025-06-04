@@ -23,8 +23,8 @@ class HomeView extends GetView<HomeController> {
     //
     return Scaffold(
       appBar: MainAppBar(
-        prefixAction: () => MyTheme.changeTheme(),
-        suffixAction: () => controller.navController.selectedIndex.value = 1,
+        prefixAction: () => MyTheme.changeTheme(), title: '',
+       // suffixAction: () => controller.navController.selectedIndex.value = 1,
       ),
       body: Obx(
         () => controller.isError.value == true

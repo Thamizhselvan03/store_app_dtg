@@ -16,8 +16,8 @@ class GraphQLView extends GetView<GraphQLController> {
 
     return Scaffold(
       appBar: MainAppBar(
-        prefixAction: () => MyTheme.changeTheme(),
-        suffixAction: () => controller.navController.selectedIndex.value = 0,
+        prefixAction: () => MyTheme.changeTheme(), title: '',
+       // suffixAction: () => controller.navController.selectedIndex.value = 0,
       ),
       body: Obx(() => controller.isError.value == true
           ? EmptyWidget(onPressed: () async => await controller.getCountries())

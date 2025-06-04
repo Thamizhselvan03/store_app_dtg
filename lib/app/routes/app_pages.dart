@@ -15,12 +15,20 @@ import '../modules/admin/inventory_tracking/bindings/inventory_tracking_binding.
 import '../modules/admin/inventory_tracking/views/inventory_tracking_view.dart';
 import '../modules/admin/product_management/bindings/product_management_binding.dart';
 import '../modules/admin/product_management/views/product_management_view.dart';
+import '../modules/customer/Cust_Grocery_list/bindings/cust_grocery_list_binding.dart';
+import '../modules/customer/Cust_Grocery_list/views/cust_grocery_list_view.dart';
+import '../modules/customer/Cust_Grocery_list_items/bindings/cust_grocery_list_items_binding.dart';
+import '../modules/customer/Cust_Grocery_list_items/views/cust_grocery_list_items_view.dart';
 import '../modules/customer/customer_home/bindings/customer_home_binding.dart';
 import '../modules/customer/customer_home/views/customer_home_view.dart';
 import '../modules/customer/customer_products_list/bindings/customer_products_list_binding.dart';
 import '../modules/customer/customer_products_list/views/customer_products_list_view.dart';
+import '../modules/customer/customers_home/bindings/customers_home_binding.dart';
+import '../modules/customer/customers_home/views/customers_home_view.dart';
 import '../modules/customer/login/bindings/login_binding.dart';
 import '../modules/customer/login/views/login_view.dart';
+import '../modules/customer/qr_scanner/bindings/qr_scanner_binding.dart';
+import '../modules/customer/qr_scanner/views/qr_scanner_view.dart';
 import '../modules/example/home-with-graphql/bindings/graphql_binding.dart';
 import '../modules/example/home-with-graphql/views/graphql_view.dart';
 import '../modules/example/home-with-restAPI/bindings/home_binding.dart';
@@ -50,6 +58,9 @@ class AppPages {
   static const SALES_HISTORY = Routes.SALES_HISTORY;
   static const REPORTS = Routes.REPORTS;
   static const ADMIN_MAIN = Routes.ADMIN_MAIN;
+  static const CUST_GROCERY_LIST = Routes.CUST_GROCERY_LIST;
+  static const CUST_GROCERY_LIST_ITEMS = Routes.CUST_GROCERY_LIST_ITEMS;
+  static const QR_SCANNER = Routes.QR_SCANNER;
 
   static final routes = [
     /// NAV BARs
@@ -130,5 +141,25 @@ class AppPages {
     //   page: () => const AdminMainView(),
     //   binding: AdminMainBinding(),
     // ),
+    GetPage(
+      name: _Paths.CUSTOMERS_HOME,
+      page: () => const CustomersHomeView(),
+      binding: CustomersHomeBinding(),
+    ),
+    GetPage(
+      name: _Paths.CUST_GROCERY_LIST,
+      page: () => const CustGroceryListView(),
+      binding: CustGroceryListBinding(),
+    ),
+    GetPage(
+      name: _Paths.CUST_GROCERY_LIST_ITEMS,
+      page: () => const CustGroceryListItemsView(),
+      binding: CustGroceryListItemsBinding(),
+    ),
+    GetPage(
+      name: _Paths.QR_SCANNER,
+      page: () => const QrScannerView(),
+      binding: QrScannerBinding(),
+    ),
   ];
 }

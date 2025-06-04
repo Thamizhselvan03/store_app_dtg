@@ -16,26 +16,35 @@ class SearchTextField extends StatelessWidget {
   });
 
   final TextEditingController textEditingController;
-  final dynamic submit;
+  final Function(String)? submit;
   final dynamic clearing;
   final String hint;
   final bool isClearButtonVisible;
   final bool isSearchButtonVisible;
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return Container(
-      height: 45.sp,
+      height: 50.sp,
       decoration: BoxDecoration(
         color: LightThemeColors.fillColor,
-        borderRadius: BorderRadius.circular(10.r),
-        border: Border.all(
-          width: 1,
-          color: LightThemeColors.buttonBorderColor,
-        ),
+        borderRadius: BorderRadius.circular(20.r),
+        border: Border.all(width: 1, color: LightThemeColors.buttonBorderColor),
       ),
       child: Row(
         children: [
+          SizedBox(width: 8,),
+          Visibility(
+            visible: isSearchButtonVisible,
+            child: Padding(
+              padding: EdgeInsets.only(right: 15.sp),
+              child: Icon(
+                Remix.search_line,
+                color: LightThemeColors.bodyTextSecondaryColor,
+              ),
+            ),
+          ),
           Expanded(
             child: TextFormField(
               controller: textEditingController,
@@ -54,10 +63,7 @@ class SearchTextField extends StatelessWidget {
                 filled: true,
                 contentPadding: EdgeInsets.symmetric(horizontal: 15.sp),
                 fillColor: LightThemeColors.fillColor,
-                errorStyle: TextStyle(
-                  height: .1,
-                  fontSize: 12.sp,
-                ),
+                errorStyle: TextStyle(height: .1, fontSize: 12.sp),
                 errorMaxLines: 1,
                 hintText: hint,
                 hintStyle: TextStyle(
@@ -66,11 +72,11 @@ class SearchTextField extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(20.r),
                   borderSide: BorderSide.none,
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.r),
+                  borderRadius: BorderRadius.circular(20.r),
                   borderSide: BorderSide.none,
                 ),
               ),
@@ -82,25 +88,17 @@ class SearchTextField extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.only(right: 15.sp),
               child: IconButton(
-                  padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints(),
-                  onPressed: clearing,
-                  icon: Icon(
-                    Remix.close_circle_fill,
-                    color: LightThemeColors.bodyTextSecondaryColor,
-                  )),
-            ),
-          ),
-          Visibility(
-            visible: isSearchButtonVisible,
-            child: Padding(
-              padding: EdgeInsets.only(right: 15.sp),
-              child: Icon(
-                Remix.search_line,
-                color: LightThemeColors.bodyTextSecondaryColor,
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(),
+                onPressed: clearing,
+                icon: Icon(
+                  Remix.close_circle_fill,
+                  color: LightThemeColors.bodyTextSecondaryColor,
+                ),
               ),
             ),
           ),
+
         ],
       ),
     );

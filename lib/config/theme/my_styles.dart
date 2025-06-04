@@ -20,7 +20,7 @@ class MyStyles {
         elevation: 0,
         titleTextStyle:
             getTextTheme(isLightTheme: isLightTheme).bodyLarge!.copyWith(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: MyFonts.appBarTittleSize,
                 ),
         iconTheme: IconThemeData(
