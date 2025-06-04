@@ -73,7 +73,7 @@ class QrScannerView extends GetView<QrScannerController> {
             Align(
               alignment: Alignment.centerLeft,
               child: TextApp(
-                text: "Recently Visited Maps",
+                text: "Recently Visited Shop",
                 theme: context.textTheme.titleLarge!.copyWith(fontSize: 17.sp),
                 textAlign: TextAlign.left,
               ),

@@ -13,7 +13,7 @@ class PrimaryButton extends StatelessWidget {
     this.backgroundColor,
     this.foregroundColor,
     this.child,
-    this.title,
+    this.title, this.width,
   });
 
   final String? title;
@@ -22,11 +22,13 @@ class PrimaryButton extends StatelessWidget {
   final Color? backgroundColor;
   final Color? foregroundColor;
   final Widget? child;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return SizedBox(
+      width: width,
       height: 55.h,
       child: ElevatedButton(
         onPressed: inactive == true ? null : onPressed,
