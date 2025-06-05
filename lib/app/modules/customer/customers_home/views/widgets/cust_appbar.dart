@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:store_app/app/routes/app_pages.dart';
+import 'package:store_app/config/extensions/context_extensions.dart';
 
 AppBar buildAppBar(BuildContext context) {
   return AppBar(
@@ -27,9 +29,21 @@ AppBar buildAppBar(BuildContext context) {
     titleTextStyle: context.textTheme.bodyLarge!.copyWith(fontSize: 16.sp),
     actions: [
       IconButton(
-        onPressed: () {},
+        onPressed: () {
+          context.pushNamed(AppPages.CUST_NOTIFICATION);
+        },
         icon: Icon(
           Get.isDarkMode ? Iconsax.notification5 : Iconsax.notification4,
+          color: Colors.black,
+        ),
+      ),
+
+      IconButton(
+        onPressed: () {
+          context.pushNamedAndRemoveUntil(AppPages.Login,);
+        },
+        icon: Icon(
+          Get.isDarkMode ? Iconsax.notification5 : Iconsax.logout_14,
           color: Colors.black,
         ),
       ),

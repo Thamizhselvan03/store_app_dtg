@@ -8,8 +8,6 @@ import '../style/fonts/font_weight_helper.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/text_app.dart';
 
-
-
 class CustomDialog {
   const CustomDialog._();
 
@@ -24,66 +22,64 @@ class CustomDialog {
     showDialog<dynamic>(
       barrierDismissible: false,
       context: context,
-      builder:
-          (context) => AlertDialog(
-            backgroundColor: Colors.grey,
-            title: Padding(
-              padding: EdgeInsets.only(top: 30.h, bottom: 20.h),
-              child: Center(
-                child: TextApp(
-                  text: textBody,
-                  theme: context.textTheme.bodyMedium!.copyWith(
-                    fontWeight: FontWeightHelper.medium,
-                    fontFamily: FontFamilyHelper.poppinsEnglish,
-                    fontSize: 18.sp,
-                    color: Colors.black,
-                  ),
-                  softWrap: true,
-                  textAlign: TextAlign.center,
-                ),
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.grey,
+        title: Padding(
+          padding: EdgeInsets.only(top: 30.h, bottom: 20.h),
+          child: Center(
+            child: TextApp(
+              text: textBody,
+              theme: context.textTheme.bodyMedium!.copyWith(
+                fontWeight: FontWeightHelper.medium,
+                fontFamily: FontFamilyHelper.poppinsEnglish,
+                fontSize: 18.sp,
+                color: Colors.black,
               ),
+              softWrap: true,
+              textAlign: TextAlign.center,
             ),
-            actions: [
-              CustomButton(
-                backgroundColor: Colors.red,
-                onPressed: onPressed,
-                text: textButton1,
-                width: 320.w,
-                height: 45.h,
-                isLoading: isLoading,
-                lastRadius: 10,
-                threeRadius: 10,
-              ),
-              SizedBox(height: 10.h, width: 1.w),
-              CustomButton(
-                onPressed: () {
-                  context.pop();
-                },
-                text: textButton2,
-                width: 320.w,
-                height: 45.h,
-                lastRadius: 10,
-                threeRadius: 10,
-              ),
-            ],
           ),
+        ),
+        actions: [
+          CustomButton(
+            backgroundColor: Colors.red,
+            onPressed: onPressed,
+            text: textButton1,
+            width: 320.w,
+            height: 45.h,
+            isLoading: isLoading,
+            lastRadius: 10,
+            threeRadius: 10,
+          ),
+          SizedBox(height: 10.h, width: 1.w),
+          CustomButton(
+            onPressed: () {
+              context.pop();
+            },
+            text: textButton2,
+            width: 320.w,
+            height: 45.h,
+            lastRadius: 10,
+            threeRadius: 10,
+          ),
+        ],
+      ),
     );
   }
-
 
   static void CustomShowDialog({
     required BuildContext context,
     required Widget child,
-
   }) {
     showDialog<dynamic>(
-      barrierDismissible: true,
+      barrierDismissible: false,
       context: context,
-      builder:
-          (context) => Dialog(
-        backgroundColor: Colors.grey,
+      builder: (context) => Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.circular(10),
+        ),
+        backgroundColor: Colors.white,
         child: child,
-
       ),
     );
   }

@@ -6,20 +6,70 @@ import 'package:get/get.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:store_app/app/components/common/widgets/text_app.dart';
 import 'package:store_app/app/components/global-widgets/main_appbar.dart';
+import 'package:store_app/app/components/global-widgets/my_buttons.dart';
 import 'package:store_app/app/routes/app_pages.dart';
 import 'package:store_app/config/extensions/context_extensions.dart';
+import 'package:store_app/app/components/common/dialogs/custom_dialogs.dart';
+import 'package:store_app/app/components/global-widgets/Custom_card.dart';
 
 import '../controllers/qr_scanner_controller.dart';
 
-class QrScannerView extends GetView<QrScannerController> {
- const  QrScannerView({super.key});
+class QrScannerView extends StatefulWidget {
+  const QrScannerView({super.key});
 
+  @override
+  State<QrScannerView> createState() => _QrScannerViewState();
+}
 
+class _QrScannerViewState extends State<QrScannerView> {
+  MobileScannerController scannerController = MobileScannerController();
+  final QrScannerController _ctrl = Get.put(QrScannerController());
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      CustomDialog.CustomShowDialog(
+        context: context,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(height: 10.h,),
+              TextApp(
+                text: "Select your Grocery List from Below",
+                theme: context.textTheme.titleLarge!,
+              ),
+              SizedBox(height: 15.h,),
+              for (var k = 0; k < 3; k++)
+                CustomCard1(
+                  leading:Radio.adaptive(value: 1, groupValue: 1, onChanged: (v){}),
+                  title: "Shop name",
+                  desc: "17 items",
+                ),
+              SizedBox(height: 15.h,),
+              SizedBox(
+                height: 45,
+                child: PrimaryButton(
+                  width: double.maxFinite,
+                  onPressed: () {
+                    Get.close(1);
+                  },
+                  inactive: false,
+                  title: "Start Shopping",
+                ),
+              ),
+              SizedBox(height: 5.h,),
+            ],
+          ),
+        ),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    MobileScannerController scannerController = MobileScannerController();
-    final QrScannerController _ctrl=Get.put(QrScannerController());
     return Scaffold(
       appBar: MainAppBar(prefixAction: () {}, title: "Scan Map QR"),
       body: Padding(
@@ -47,7 +97,7 @@ class QrScannerView extends GetView<QrScannerController> {
                         Get.snackbar("QR Code", code);
 
                         context.pushNamed(AppPages.CUSTOMER_HOME);
-                       // Get.snackbar("QR Code", code);
+                        // Get.snackbar("QR Code", code);
                       }
                     },
                   ),

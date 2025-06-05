@@ -19,7 +19,7 @@ class CustGroceryListView extends GetView<CustGroceryListController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainAppBar(prefixAction: () {}, title: "Grocery Lists"),
+      appBar: MainAppBar(title: "Grocery Lists"),
       body: Padding(
         padding: EdgeInsets.all(10.w),
         child: Column(

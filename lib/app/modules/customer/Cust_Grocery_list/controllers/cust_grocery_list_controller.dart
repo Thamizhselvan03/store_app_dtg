@@ -20,4 +20,5 @@ class CustGroceryListController extends GetxController {
   }
 
   void increment() => count.value++;
+  RxInt selectedIndex = 0.obs;
 }

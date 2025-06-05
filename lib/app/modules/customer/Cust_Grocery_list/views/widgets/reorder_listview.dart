@@ -17,7 +17,7 @@ class ReorderableListGloceryViewWidget extends StatefulWidget {
 class _ReorderableListGloceryViewWidgetState extends State<ReorderableListGloceryViewWidget> {
   final List<String> _products = [
     'Sunday Grocery',
-    'Weakly Grocery',
+    'Weekly Grocery',
     'Monday Grocery',
     'Monthly Grocery',
 

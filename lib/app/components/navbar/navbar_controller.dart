@@ -9,7 +9,7 @@ class NavbarController extends GetxController {
   List navigation = [
     const CustomersHomeView(),
     const CustGroceryListView(),
-   const QrScannerView(),
+    const QrScannerView(),
     const GraphQLView(),
   ];
   RxInt selectedIndex = 0.obs;

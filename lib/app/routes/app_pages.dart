@@ -19,6 +19,8 @@ import '../modules/customer/Cust_Grocery_list/bindings/cust_grocery_list_binding
 import '../modules/customer/Cust_Grocery_list/views/cust_grocery_list_view.dart';
 import '../modules/customer/Cust_Grocery_list_items/bindings/cust_grocery_list_items_binding.dart';
 import '../modules/customer/Cust_Grocery_list_items/views/cust_grocery_list_items_view.dart';
+import '../modules/customer/custNotification/bindings/cust_notification_binding.dart';
+import '../modules/customer/custNotification/views/cust_notification_view.dart';
 import '../modules/customer/customer_home/bindings/customer_home_binding.dart';
 import '../modules/customer/customer_home/views/customer_home_view.dart';
 import '../modules/customer/customer_products_list/bindings/customer_products_list_binding.dart';
@@ -61,6 +63,7 @@ class AppPages {
   static const CUST_GROCERY_LIST = Routes.CUST_GROCERY_LIST;
   static const CUST_GROCERY_LIST_ITEMS = Routes.CUST_GROCERY_LIST_ITEMS;
   static const QR_SCANNER = Routes.QR_SCANNER;
+  static const CUST_NOTIFICATION = Routes.CUST_NOTIFICATION;
 
   static final routes = [
     /// NAV BARs
@@ -160,6 +163,11 @@ class AppPages {
       name: _Paths.QR_SCANNER,
       page: () => const QrScannerView(),
       binding: QrScannerBinding(),
+    ),
+    GetPage(
+      name: _Paths.CUST_NOTIFICATION,
+      page: () => const CustNotificationView(),
+      binding: CustNotificationBinding(),
     ),
   ];
 }

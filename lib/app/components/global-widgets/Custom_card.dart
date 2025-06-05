@@ -22,7 +22,7 @@ class CustomCard extends StatelessWidget {
     required this.img,
     required this.title,
     required this.desc,
-     this.icon,
+    this.icon,
     this.onTap,
     this.iconTap,
   });
@@ -64,9 +64,74 @@ class CustomCard extends StatelessWidget {
         ),
         trailing: IconButton(
           onPressed: iconTap,
-          icon:  Icon(icon??Icons.more_vert),
+          icon: Icon(icon ?? Icons.more_vert),
           color: context.theme.hintColor,
         ),
+        tileColor: Colors.white,
+        iconColor: Colors.black,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      ),
+    );
+  }
+}
+
+class CustomCard1 extends StatelessWidget {
+  const CustomCard1({
+    super.key,
+    this.leading,
+    required this.title,
+    required this.desc,
+    this.trailing,
+    this.onTap,
+    this.iconTap,
+  });
+
+  final Widget? leading;
+  final String title;
+  final String desc;
+  final Widget? trailing;
+  final Function()? onTap;
+  final Function()? iconTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      key: key,
+      color: Colors.white,
+      elevation: 0,
+
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: BorderSide(color: Colors.grey.shade400),
+      ),
+      child: ListTile(
+        onTap: onTap,
+        dense: true,
+        contentPadding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5),
+        leading: leading,
+        title: TextApp(
+          text: title,
+          theme: context.textTheme.bodyLarge!.copyWith(
+            color: Colors.black,
+
+            fontSize: 14.sp,
+          ),
+        ),
+        subtitle: TextApp(
+          text: desc,
+          theme: context.textTheme.bodyLarge!.copyWith(
+            color: context.theme.hintColor,
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        trailing: trailing == null
+            ? SizedBox.shrink()
+            : IconButton(
+                onPressed: iconTap,
+                icon: Icon(Icons.more_vert),
+                color: context.theme.hintColor,
+              ),
         tileColor: Colors.white,
         iconColor: Colors.black,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),

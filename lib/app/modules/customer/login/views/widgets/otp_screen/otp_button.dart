@@ -20,7 +20,8 @@ class OtpButton extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: 50.w,
         onPressed: () {
-          context.pushNamed(AppPages.CUSTOMER_HOME);
+          // context.pushReplacementNamed(AppPages.FLOATING_NAV);
+           context.pushReplacementNamed(AppPages.DASHBOARD);
         },
         child: TextApp(
           text: 'Next',

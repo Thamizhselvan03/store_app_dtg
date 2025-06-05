@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:store_app/app/components/common/style/colors/colors_light.dart';
 
 import '../../../../../../config/theme/light_theme_colors.dart';
+import '../../../Cust_Grocery_list/controllers/cust_grocery_list_controller.dart';
 
 class SecondaryTabbar extends StatefulWidget {
   final double radius;
@@ -15,7 +16,7 @@ class SecondaryTabbar extends StatefulWidget {
 }
 
 class _SecondaryTabbarState extends State<SecondaryTabbar> {
-  int _selectedIndex = 0;
+  final _ctrl = Get.put(CustGroceryListController());
 
   @override
   Widget build(BuildContext context) {
@@ -33,45 +34,51 @@ class _SecondaryTabbarState extends State<SecondaryTabbar> {
             Expanded(
               child: GestureDetector(
                 onTap: () {
-                  setState(() {
-                    _selectedIndex = 0;
-                  });
+                  _ctrl.selectedIndex.value = 0;
                 },
-                child: Container(
-                  color: _selectedIndex == 0
-                      ? context.iconColor
-                      : Colors.white,
-                  child: Center(
-                    child: Text(
-                      'Ongoing',
-                      style: context.textTheme.bodyMedium!.copyWith(
-                        fontWeight: FontWeight.w500,
-                        color: _selectedIndex == 0 ? Colors.white : context.theme.hintColor,
+                child: Obx(() {
+                  return Container(
+                    color: _ctrl.selectedIndex.value == 0
+                        ? context.iconColor
+                        : Colors.white,
+                    child: Center(
+                      child: Text(
+                        'Ongoing',
+                        style: context.textTheme.bodyMedium!.copyWith(
+                          fontWeight: FontWeight.w500,
+                          color: _ctrl.selectedIndex.value == 0
+                              ? Colors.white
+                              : context.theme.hintColor,
+                        ),
                       ),
                     ),
-                  ),
-                ),
+                  );
+                }),
               ),
             ),
             Expanded(
               child: GestureDetector(
                 onTap: () {
-                  setState(() {
-                    _selectedIndex = 1;
-                  });
+                  _ctrl.selectedIndex.value = 1;
                 },
-                child: Container(
-                  color: _selectedIndex == 1 ? context.iconColor : Colors.white,
-                  child: Center(
-                    child: Text(
-                      'Completed',
-                      style: context.textTheme.bodyMedium!.copyWith(
-                        fontWeight: FontWeight.w500,
-                        color: _selectedIndex == 1 ? Colors.white : context.theme.hintColor,
+                child: Obx(() {
+                  return Container(
+                    color: _ctrl.selectedIndex.value == 1
+                        ? context.iconColor
+                        : Colors.white,
+                    child: Center(
+                      child: Text(
+                        'Completed',
+                        style: context.textTheme.bodyMedium!.copyWith(
+                          fontWeight: FontWeight.w500,
+                          color: _ctrl.selectedIndex.value == 1
+                              ? Colors.white
+                              : context.theme.hintColor,
+                        ),
                       ),
                     ),
-                  ),
-                ),
+                  );
+                }),
               ),
             ),
           ],

@@ -7,11 +7,12 @@ import 'package:iconsax/iconsax.dart';
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MainAppBar({
     super.key,
-    required this.prefixAction,
-    required this.title,  this.suffix,
+    this.prefixAction,
+    required this.title,
+    this.suffix,
   });
 
-  final VoidCallback prefixAction;
+  final VoidCallback? prefixAction;
 
   final String title;
   final List<Widget>? suffix;
@@ -20,14 +21,16 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: Text(title),
-      leading: IconButton(
-        onPressed: prefixAction,
-        icon: Icon(
-          Get.isDarkMode ? Iconsax.backward : CupertinoIcons.back,
-          color: Get.isDarkMode ? Colors.white : Colors.black,
-        ),
-      ),
-      actions:suffix,
+      leading: prefixAction == null
+          ? null
+          : IconButton(
+              onPressed: prefixAction,
+              icon: Icon(
+                Get.isDarkMode ? Iconsax.backward : CupertinoIcons.back,
+                color: Get.isDarkMode ? Colors.white : Colors.black,
+              ),
+            ),
+      actions: suffix,
       centerTitle: true,
     );
   }
