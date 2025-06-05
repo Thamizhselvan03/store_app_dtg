@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:get/get.dart';
 import 'package:store_app/app/components/common/widgets/text_app.dart';
 import 'package:store_app/config/extensions/context_extensions.dart';
 
@@ -32,7 +33,7 @@ class AdminAppBar extends StatelessWidget implements PreferredSizeWidget {
         },
         child: TextApp(
           text: title,
-          theme: context.textStyle.copyWith(
+          theme: context.textTheme.bodyLarge!.copyWith(
             fontSize: 18.sp,
             fontFamily: FontFamilyHelper.poppinsEnglish,
             fontWeight: FontWeightHelper.bold,

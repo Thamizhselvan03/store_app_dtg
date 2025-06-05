@@ -48,7 +48,7 @@ class TwitterDrawerHeader extends StatelessWidget {
               const Spacer(),
                Text(
               'Tam',
-                style: context.textStyle.copyWith(
+                style: context.textTheme.bodyMedium!.copyWith(
                     fontSize: 18,
                     fontWeight: FontWeightHelper.bold,
                     color: Colors.white),

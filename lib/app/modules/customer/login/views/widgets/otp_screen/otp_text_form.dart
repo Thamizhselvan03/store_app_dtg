@@ -46,7 +46,7 @@ class _OtpTextFormState extends State<OtpTextForm> {
     final defaultPinTheme = PinTheme(
       width: 56.w,
       height: 60.h,
-      textStyle: context.textStyle.copyWith(
+      textStyle: context.textTheme.bodyMedium!.copyWith(
         fontSize: 18.sp,
         fontWeight: FontWeightHelper.medium,
       ),

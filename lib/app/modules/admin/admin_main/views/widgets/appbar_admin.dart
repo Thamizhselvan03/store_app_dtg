@@ -58,7 +58,7 @@ class MainAdminAppBar extends StatelessWidget implements PreferredSizeWidget {
                   duration: 800,
                   child: TextApp(
                     text: "Dashboard",
-                    theme: context.textStyle.copyWith(
+                    theme: context.textTheme.bodyMedium!.copyWith(
                       fontSize: 20.sp,
                       fontWeight: FontWeightHelper.bold,
                       //color: context.color.textColor,
@@ -83,7 +83,7 @@ class MainAdminAppBar extends StatelessWidget implements PreferredSizeWidget {
               duration: 800,
               child: TextApp(
                 text: 'Your Favorite',
-                theme: context.textStyle.copyWith(
+                theme: context.textTheme.bodyMedium!.copyWith(
                   fontSize: 20.sp,
                   fontWeight: FontWeightHelper.bold,
                  // color: context.color.textColor,
@@ -95,7 +95,7 @@ class MainAdminAppBar extends StatelessWidget implements PreferredSizeWidget {
               duration: 800,
               child: TextApp(
                 text: 'Notifications',
-                theme: context.textStyle.copyWith(
+                theme: context.textTheme.bodyMedium!.copyWith(
                   fontSize: 20.sp,
                   fontWeight: FontWeightHelper.bold,
                  // color: context.color.textColor,

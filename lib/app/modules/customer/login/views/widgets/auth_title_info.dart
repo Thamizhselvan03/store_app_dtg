@@ -33,7 +33,7 @@ class AuthTittleInfo extends StatelessWidget {
           //title
           TextApp(
             text: title,
-            theme: context.textStyle.copyWith(
+            theme: context.textTheme.bodyMedium!.copyWith(
               fontSize: 24.sp,
               fontWeight: FontWeightHelper.bold,
             ),

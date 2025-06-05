@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 import 'package:store_app/config/extensions/context_extensions.dart';
 
@@ -38,13 +39,13 @@ class TwitterDrawerTile extends StatelessWidget {
       title: Text(
         title,
         style: isSubTile
-            ? context.textStyle.copyWith(
+            ? context.textTheme.bodyMedium!.copyWith(
                 fontSize: 12.sp,
                 fontWeight: FontWeightHelper.medium,
                 color: Colors.black,
                 fontFamily: FontFamilyHelper.poppinsEnglish,
               )
-            : context.textStyle.copyWith(
+            : context.textTheme.bodyMedium!.copyWith(
                 fontSize: 14.sp,
                 fontWeight: FontWeightHelper.bold,
                 color: Colors.black,

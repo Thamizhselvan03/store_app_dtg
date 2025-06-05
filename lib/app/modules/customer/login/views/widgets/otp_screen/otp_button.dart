@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:store_app/app/routes/app_pages.dart';
 import 'package:store_app/config/extensions/context_extensions.dart';
 
@@ -23,7 +24,7 @@ class OtpButton extends StatelessWidget {
         },
         child: TextApp(
           text: 'Next',
-          theme: context.textStyle.copyWith(
+          theme: context.textTheme.bodyMedium!.copyWith(
             fontSize: 18.sp,
             fontWeight: FontWeightHelper.bold,
           ),

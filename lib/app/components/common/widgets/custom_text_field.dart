@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:store_app/config/extensions/context_extensions.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
@@ -43,11 +42,11 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-       cursorColor: Colors.black,
+      cursorColor: Colors.black,
       style: context.textTheme.bodyMedium!.copyWith(
         fontSize: 14.sp,
 
-       // fontWeight: FontWeight.w500,
+        // fontWeight: FontWeight.w500,
         // color: context.color.textColor,
       ),
       validator: (value) {
@@ -91,12 +90,12 @@ class CustomTextField extends StatelessWidget {
         hintText: hintText,
         hintStyle:
             hintStyle ??
-            context.textStyle.copyWith(
-             // color: context.color.textColor,
+            context.textTheme.bodyMedium!.copyWith(
+              // color: context.color.textColor,
               fontWeight: FontWeight.w400,
               fontSize: 14.sp,
             ),
-        errorStyle: context.textStyle.copyWith(
+        errorStyle: context.textTheme.bodyMedium!.copyWith(
           color: Colors.red,
           fontWeight: FontWeight.w400,
           fontSize: 12.sp,

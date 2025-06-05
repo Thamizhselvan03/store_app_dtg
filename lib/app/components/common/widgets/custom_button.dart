@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import 'package:store_app/app/components/common/widgets/text_app.dart';
 import 'package:store_app/config/extensions/context_extensions.dart';
@@ -56,7 +57,7 @@ class CustomButton extends StatelessWidget {
         ),
         onPressed: onPressed,
         child: TextApp(
-          theme: context.textStyle.copyWith(
+          theme: context.textTheme.bodyLarge!.copyWith(
             color: textColor ?? Colors.white,
             fontWeight: FontWeightHelper.medium,
             fontFamily: FontFamilyHelper.poppinsEnglish,

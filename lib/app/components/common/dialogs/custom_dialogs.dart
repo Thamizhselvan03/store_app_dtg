@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:store_app/config/extensions/context_extensions.dart';
 
 import '../style/fonts/font_family_helper.dart';
@@ -31,7 +32,7 @@ class CustomDialog {
               child: Center(
                 child: TextApp(
                   text: textBody,
-                  theme: context.textStyle.copyWith(
+                  theme: context.textTheme.bodyMedium!.copyWith(
                     fontWeight: FontWeightHelper.medium,
                     fontFamily: FontFamilyHelper.poppinsEnglish,
                     fontSize: 18.sp,
@@ -66,6 +67,24 @@ class CustomDialog {
               ),
             ],
           ),
+    );
+  }
+
+
+  static void CustomShowDialog({
+    required BuildContext context,
+    required Widget child,
+
+  }) {
+    showDialog<dynamic>(
+      barrierDismissible: true,
+      context: context,
+      builder:
+          (context) => Dialog(
+        backgroundColor: Colors.grey,
+        child: child,
+
+      ),
     );
   }
 }

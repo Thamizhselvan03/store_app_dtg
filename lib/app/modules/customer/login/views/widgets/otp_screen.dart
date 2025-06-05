@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:store_app/config/extensions/context_extensions.dart';
-
 import '../../../../../components/common/animations/animate_do.dart';
 import '../../../../../components/common/style/fonts/font_weight_helper.dart';
 import '../../../../../components/common/widgets/text_app.dart';
@@ -15,7 +13,10 @@ class OtpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        return  Scaffold(body: SafeArea(bottom: false, child: Padding(
+    return Scaffold(
+      body: SafeArea(
+        bottom: false,
+        child: Padding(
           padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
           child: SingleChildScrollView(
             child: Center(
@@ -26,7 +27,7 @@ class OtpScreen extends StatelessWidget {
                   const AuthTittleInfo(
                     title: 'verification',
                     description:
-                    'SMS Verification code has been sent \n\n +91 9876543210',
+                        'SMS Verification code has been sent \n\n +91 9876543210',
                   ),
 
                   SizedBox(height: 40.h),
@@ -41,7 +42,9 @@ class OtpScreen extends StatelessWidget {
                   // resend otp
                   TextApp(
                     text: "Didn't receive code?",
-                    theme: context.textStyle.copyWith(fontSize: 14.sp),
+                    theme: context.textTheme.bodyMedium!.copyWith(
+                      fontSize: 14.sp,
+                    ),
                   ),
 
                   // Resend otp button
@@ -49,11 +52,11 @@ class OtpScreen extends StatelessWidget {
                     duration: 600,
                     child: TextButton(
                       onPressed: () {
-                      //  context.pushReplacementNamed(AppRoutes.login);
+                        //  context.pushReplacementNamed(AppRoutes.login);
                       },
                       child: TextApp(
                         text: 'Resend ',
-                        theme: context.textStyle.copyWith(
+                        theme: context.textTheme.bodyMedium!.copyWith(
                           fontSize: 16.sp,
                           color: context.theme.primaryColor,
                           fontWeight: FontWeightHelper.bold,
@@ -65,7 +68,8 @@ class OtpScreen extends StatelessWidget {
               ),
             ),
           ),
-        )));
-
+        ),
+      ),
+    );
   }
 }

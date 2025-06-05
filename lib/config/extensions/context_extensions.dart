@@ -12,7 +12,7 @@ extension ContextExt on BuildContext {
   // MyAssets get assets => Theme.of(this).extension<MyAssets>()!;
 
   //style
-  TextStyle get textStyle => Theme.of(this).textTheme.displaySmall!;
+  //TextStyle get textStyle => Theme.of(this).textTheme.displaySmall!;
 
   // //localization
   // String translate(String langKey) {
