@@ -21,7 +21,7 @@ class LightThemeColors {
   static Color canvasColor = scaffoldBackgroundColor;
 
   //ICONS
-  static const Color appBarIconsColor = Colors.white;
+  static const Color appBarIconsColor = Colors.black;
   static const Color iconColor = Color(0xff2c2c2c);
 
   //BUTTON

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class ProductManagementController extends GetxController {
@@ -18,6 +19,8 @@ class ProductManagementController extends GetxController {
   void onClose() {
     super.onClose();
   }
+
+ final productNameTC =TextEditingController();
 
   final productName = ''.obs;
   final rackNumber = ''.obs;

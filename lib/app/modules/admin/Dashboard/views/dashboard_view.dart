@@ -16,9 +16,9 @@ class DashboardView extends GetView<DashboardController> {
     return Scaffold(
       drawer: DrawerAdmin(),
       appBar: AppBar(
-        title: const Text('DashboardView'),
+        title: const Text('Dashboard'),
         centerTitle: true,
-        leading: Icon(Icons.menu,color: Colors.black,),
+      //  leading: Icon(Icons.menu, color: Colors.black),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
@@ -29,24 +29,25 @@ class DashboardView extends GetView<DashboardController> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 CircleAvatar(
-                  child: Icon(Icons.person_2_outlined),
+                  radius: 30.r,
+                  backgroundColor: context.theme.primaryColor,
+                  child: Icon(Icons.person_2_outlined, color: Colors.white),
+                ),
+                CircleAvatar(
+                  child: Icon(Icons.list_alt, color: Colors.white),
                   radius: 30.r,
                   backgroundColor: context.theme.primaryColor,
                 ),
                 CircleAvatar(
-                  child: Icon(Icons.notifications_none),
+                  child: Icon(Icons.notifications_none, color: Colors.white),
                   radius: 30.r,
                   backgroundColor: context.theme.primaryColor,
                 ),
 
-                CircleAvatar(
-                  child: Icon(Icons.list_alt),
-                  radius: 30.r,
-                  backgroundColor: context.theme.primaryColor,
-                ),
+
 
                 CircleAvatar(
-                  child: Icon(Icons.settings),
+                  child: Icon(Icons.settings, color: Colors.white),
                   radius: 30.r,
                   backgroundColor: context.theme.primaryColor,
                 ),

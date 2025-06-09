@@ -95,7 +95,7 @@ class GeneralTextField extends StatelessWidget {
         errorMaxLines: 1,
         hintText: hint,
         hintStyle: TextStyle(
-          color: LightThemeColors.bodyTextSecondaryColor,
+          color: context.theme.hintColor,
           fontSize: 13.sp,
           fontWeight: FontWeight.w500,
         ),
