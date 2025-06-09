@@ -15,7 +15,7 @@ class CustomBottomSheet {
           borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
         ),
         context: context,
-        backgroundColor: backgroundColor ?? Get.theme.primaryColor,
+        backgroundColor: backgroundColor ?? Colors.white,
         isScrollControlled: true,
         barrierColor: Colors.transparent,
         builder: (context) {

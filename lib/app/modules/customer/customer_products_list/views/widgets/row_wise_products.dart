@@ -11,7 +11,7 @@ class RowWiseProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
+    return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.h),
       child: ListView.builder(
         physics: NeverScrollableScrollPhysics(),
@@ -20,8 +20,7 @@ class RowWiseProducts extends StatelessWidget {
         itemBuilder: (context, index) => Padding(
           padding: const EdgeInsets.symmetric(vertical: 5),
           child: Row(
-            mainAxisSize: MainAxisSize.min
-            ,
+            mainAxisSize: MainAxisSize.min,
             children: [
               SizedBox(width: 5),
               CustomContainerLinearAdmin(

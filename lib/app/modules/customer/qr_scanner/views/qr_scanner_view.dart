@@ -24,48 +24,62 @@ class QrScannerView extends StatefulWidget {
 class _QrScannerViewState extends State<QrScannerView> {
   MobileScannerController scannerController = MobileScannerController();
   final QrScannerController _ctrl = Get.put(QrScannerController());
+  bool isScanned = false;
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      CustomDialog.CustomShowDialog(
-        context: context,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(height: 10.h,),
-              TextApp(
-                text: "Select your Grocery List from Below",
-                theme: context.textTheme.titleLarge!,
-              ),
-              SizedBox(height: 15.h,),
-              for (var k = 0; k < 3; k++)
-                CustomCard1(
-                  leading:Radio.adaptive(value: 1, groupValue: 1, onChanged: (v){}),
-                  title: "Shop name",
-                  desc: "17 items",
+    Future.delayed(Duration(milliseconds: 500), () {
+      if (mounted) {
+        CustomDialog.CustomShowDialog(
+          context: context,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(height: 10.h),
+                TextApp(
+                  text: "Select your Grocery List from Below",
+                  theme: context.textTheme.titleLarge!,
                 ),
-              SizedBox(height: 15.h,),
-              SizedBox(
-                height: 45,
-                child: PrimaryButton(
-                  width: double.maxFinite,
-                  onPressed: () {
-                    Get.close(1);
-                  },
-                  inactive: false,
-                  title: "Start Shopping",
+                SizedBox(height: 15.h),
+                for (var k = 0; k < 3; k++)
+                  CustomCard1(
+                    leading: Radio.adaptive(
+                      value: 1,
+                      groupValue: 1,
+                      onChanged: (v) {},
+                    ),
+                    title: "Shop name",
+                    desc: "17 items",
+                  ),
+                SizedBox(height: 15.h),
+                SizedBox(
+                  height: 45,
+                  child: PrimaryButton(
+                    width: double.maxFinite,
+                    onPressed: () {
+                      Get.close(1);
+                    },
+                    inactive: false,
+                    title: "Start Shopping",
+                  ),
                 ),
-              ),
-              SizedBox(height: 5.h,),
-            ],
+                SizedBox(height: 5.h),
+              ],
+            ),
           ),
-        ),
-      );
+        );
+      }
     });
+  }
+
+  @override
+  Future<void> dispose() async {
+    await scannerController.dispose();
+    // TODO: implement dispose
+    super.dispose();
   }
 
   @override
@@ -86,18 +100,28 @@ class _QrScannerViewState extends State<QrScannerView> {
                   height: MediaQuery.of(context).size.height * .4,
 
                   child: MobileScanner(
+                    useAppLifecycleState: true,
+                    controller: scannerController,
                     fit: BoxFit.cover,
-                    onDetect: (capture) {
+                    onDetect: (capture) async {
+                      if (isScanned) return;
+                      isScanned = true;
+
                       final List<Barcode> barcodes = capture.barcodes;
                       if (barcodes.isNotEmpty) {
                         final String code = barcodes.first.rawValue ?? "---";
                         _ctrl.setScannedCode(code);
-                        // Stop the camera
-                        scannerController.stop();
-                        Get.snackbar("QR Code", code);
 
-                        context.pushNamed(AppPages.CUSTOMER_HOME);
-                        // Get.snackbar("QR Code", code);
+                        // STOP camera before navigation
+                        await scannerController.stop();
+
+                        // Delay to allow camera frame buffers to clear
+                        await Future.delayed(Duration(milliseconds: 300));
+
+                        if (mounted) {
+                          Get.snackbar("QR Code", code);
+                          context.pushNamed(AppPages.CUSTOMER_HOME);
+                        }
                       }
                     },
                   ),

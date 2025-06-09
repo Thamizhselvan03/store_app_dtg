@@ -12,6 +12,7 @@ import '../controllers/customer_products_list_controller.dart';
 
 class CustomerProductsListView extends GetView<CustomerProductsListController> {
   const CustomerProductsListView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,14 +26,13 @@ class CustomerProductsListView extends GetView<CustomerProductsListController> {
         centerTitle: true,
       ),
       body: Column(
-          children: [
-            const SizedBox(height: 10),
+        children: [
+          const SizedBox(height: 10),
 
-            ProductSearchInsideRack(),
-        RowWiseProducts()
-          ],
-        ),
-
+          ProductSearchInsideRack(),
+          RowWiseProducts(),
+        ],
+      ),
     );
   }
 }

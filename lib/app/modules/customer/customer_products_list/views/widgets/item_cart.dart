@@ -1,12 +1,19 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:store_app/app/components/common/widgets/text_app.dart';
+
+import '../../../../../components/common/bottom_shet/custom_bottom_sheet.dart';
 
 class ItemCart extends StatelessWidget {
   const ItemCart({super.key, required this.cart});
+
   final Cart cart;
+
   @override
   Widget build(BuildContext context) {
-    return   SizedBox(
+    return SizedBox(
       height: 100,
       child: ListView.builder(
         shrinkWrap: true,
@@ -16,35 +23,90 @@ class ItemCart extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: 5,
         itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(1),
-            child: SizedBox(
-              height: 40.h,
-              width: 75.w,
-              child: Container(
-                padding: const EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFF5F6F9),
-                  borderRadius: BorderRadius.circular(15),
+          return GestureDetector(
+            onTap: () {
+              CustomBottomSheet.showModalBottomSheetContainer(
+                context: context,
+                widget: ConstrainedBox(
+                  constraints: BoxConstraints(maxHeight: 95.h),
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    separatorBuilder: (context, index) => SizedBox(width: 5),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.r),
+                          color: context.theme.canvasColor,
+                        ),
+                        width: 80,
+                        child: Column(
+                          children: [
+                            CachedNetworkImage(
+                              width: 50,
+                              height: 50,
+                              imageUrl:
+                                  'https://i.postimg.cc/c19zpJ6f/Image-Popular-Product-1.png',
+                            ),
+                            Text('shell '),
+                            TextApp(
+                              text: "Qty: 20",
+                              theme: context.textTheme.bodySmall!,
+                            ),
+                            // ListTile(
+                            //   shape: RoundedRectangleBorder(
+                            //     borderRadius: BorderRadiusGeometry.circular(10.r),
+                            //   ),
+                            //   tileColor: context.theme.canvasColor,
+                            //   dense: true,
+                            //   leading:
+                            //   title: Text('shell '),
+                            //   subtitle: TextApp(
+                            //     text: "Qty: 20",
+                            //     theme: context.textTheme.bodySmall!,
+                            //  ),
+                            //),
+                          ],
+                        ),
+                      );
+                    },
+                    itemCount: 4,
+                  ),
                 ),
-                child: Column(
-                  children: [
-                    Image.network(
-                      cart.product.images[0],
-                      height: 30.h,
-                      width: 30.h,
-                    ),
-                    Text(
-                      cart.product.title,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 12.sp,
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(1),
+              child: SizedBox(
+                height: 40.h,
+                width: 75.w,
+                child: Container(
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFF5F6F9),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextApp(
+                        text: "Shell 1",
+                        theme: context.textTheme.bodyLarge!,
                       ),
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
+                      // Image.network(
+                      //   cart.product.images[0],
+                      //   height: 30.h,
+                      //   width: 30.h,
+                      // ),
+                      // Text(
+                      //   cart.product.title,
+                      //   style: TextStyle(color: Colors.black, fontSize: 12.sp),
+                      //   maxLines: 3,
+                      //   overflow: TextOverflow.ellipsis,
+                      //   textAlign: TextAlign.center,
+                      // ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -54,10 +116,6 @@ class ItemCart extends StatelessWidget {
     );
   }
 }
-
-
-
-
 
 class Cart {
   final Product product;
