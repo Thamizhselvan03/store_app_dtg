@@ -38,6 +38,8 @@ import '../modules/example/home-with-restAPI/views/home_view.dart';
 import '../modules/example/home-with-restAPI/views/post_detail_view.dart';
 import '../modules/onboarding/bindings/onboarding_binding.dart';
 import '../modules/onboarding/views/onboarding_view.dart';
+import '../modules/testwidgets/bindings/testwidgets_binding.dart';
+import '../modules/testwidgets/views/testwidgets_view.dart';
 
 // ignore_for_file: constant_identifier_names
 
@@ -64,6 +66,7 @@ class AppPages {
   static const CUST_GROCERY_LIST_ITEMS = Routes.CUST_GROCERY_LIST_ITEMS;
   static const QR_SCANNER = Routes.QR_SCANNER;
   static const CUST_NOTIFICATION = Routes.CUST_NOTIFICATION;
+  static const TESTWIDGETS = Routes.TESTWIDGETS;
 
   static final routes = [
     /// NAV BARs
@@ -168,6 +171,11 @@ class AppPages {
       name: _Paths.CUST_NOTIFICATION,
       page: () => const CustNotificationView(),
       binding: CustNotificationBinding(),
+    ),
+    GetPage(
+      name: _Paths.TESTWIDGETS,
+      page: () => const TestwidgetsView(),
+      binding: TestwidgetsBinding(),
     ),
   ];
 }

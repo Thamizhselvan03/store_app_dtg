@@ -25,7 +25,8 @@ abstract class Routes {
   static const CUST_GROCERY_LIST = _Paths.CUST_GROCERY_LIST;
   static const CUST_GROCERY_LIST_ITEMS = _Paths.CUST_GROCERY_LIST_ITEMS;
   static const QR_SCANNER = _Paths.QR_SCANNER;
-  static const CUST_NOTIFICATION =  _Paths.CUST_NOTIFICATION;
+  static const CUST_NOTIFICATION = _Paths.CUST_NOTIFICATION;
+  static const TESTWIDGETS = _Paths.TESTWIDGETS;
 }
 
 abstract class _Paths {
@@ -51,4 +52,5 @@ abstract class _Paths {
   static const CUST_GROCERY_LIST_ITEMS = '/cust-grocery-list-items';
   static const QR_SCANNER = '/qr-scanner';
   static const CUST_NOTIFICATION = '/cust-notification';
+  static const TESTWIDGETS = '/testwidgets';
 }

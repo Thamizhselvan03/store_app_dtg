@@ -20,6 +20,7 @@ class MyApp extends GetView {
       rebuildFactor: (old, data) => true,
       builder: (context, widget) {
         return GetMaterialApp(
+
           title: "Store app",
           useInheritedMediaQuery: true,
           debugShowCheckedModeBanner: false,
@@ -28,15 +29,21 @@ class MyApp extends GetView {
             bool themeIsLight = MySharedPref.getThemeIsLight();
             return Theme(
               data: MyTheme.getThemeData(isLight: themeIsLight),
-              child: MediaQuery(
-                data: MediaQuery.of(context)
-                    .copyWith(textScaler: const TextScaler.linear(1.0)),
-                child: widget!,
+              child: GestureDetector(
+                onTap: () {
+                  FocusManager.instance.primaryFocus!.unfocus();
+                },
+                child: MediaQuery(
+                  data: MediaQuery.of(context)
+                      .copyWith(textScaler: const TextScaler.linear(1.0)),
+                  child: widget!,
+                ),
               ),
             );
           },
 
-          initialRoute: AppPages.FLOATING_NAV,
+           // initialRoute: AppPages.FLOATING_NAV,
+          initialRoute: AppPages.TESTWIDGETS,
           // first screen to show when app is running
 
           defaultTransition: Transition.fadeIn,

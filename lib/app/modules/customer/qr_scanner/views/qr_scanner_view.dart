@@ -176,7 +176,6 @@ class _QrScannerViewState extends State<QrScannerView> {
 
                       trailing: IconButton(
                         constraints: BoxConstraints.tight(Size.fromWidth(20)),
-
                         onPressed: () {},
                         icon: Icon(Icons.more_vert),
                         color: context.theme.hintColor,

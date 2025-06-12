@@ -14,10 +14,15 @@ import '../../../../components/global-widgets/general_text_field.dart';
 import '../controllers/cust_grocery_list_controller.dart';
 
 class CustGroceryListView extends GetView<CustGroceryListController> {
-  const CustGroceryListView({super.key});
+  const CustGroceryListView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // Use Get.find() if controller is already initialized elsewhere
+    final _controller = Get.put(CustGroceryListController());
+    // Initialize text controller once
+    final TextEditingController titleController = TextEditingController();
+
     return Scaffold(
       appBar: MainAppBar(title: "Grocery Lists"),
       body: Padding(
@@ -25,7 +30,7 @@ class CustGroceryListView extends GetView<CustGroceryListController> {
         child: Column(
           children: [
             SizedBox(height: 20.h),
-            SecondaryTabbar(radius: 15.r),
+            const SecondaryTabbar(radius: 15),
             SizedBox(height: 10.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -41,6 +46,7 @@ class CustGroceryListView extends GetView<CustGroceryListController> {
                       backgroundColor: Colors.white,
                       context: context,
                       widget: Column(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           Container(
                             width: double.maxFinite,
@@ -49,16 +55,18 @@ class CustGroceryListView extends GetView<CustGroceryListController> {
                             child: Icon(Icons.photo),
                           ),
                           SizedBox(height: 10.h),
+                          // Use the same controller's TextEditingController
                           GeneralTextField(
                             hint: 'title',
                             theme: context.theme,
-                            textEditingController: TextEditingController(),
+                            textEditingController: titleController,
                           ),
                           SizedBox(height: 15.h),
                           PrimaryButton(
                             width: double.maxFinite,
                             title: "Submit",
                             onPressed: () {
+                              // Perform save or add operation here
                               Get.close(1);
                             },
                             inactive: false,
@@ -71,6 +79,7 @@ class CustGroceryListView extends GetView<CustGroceryListController> {
                 ),
               ],
             ),
+            const SizedBox(height: 10),
             Expanded(child: ReorderableListGloceryViewWidget()),
           ],
         ),
