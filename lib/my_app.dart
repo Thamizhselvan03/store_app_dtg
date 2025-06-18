@@ -20,7 +20,6 @@ class MyApp extends GetView {
       rebuildFactor: (old, data) => true,
       builder: (context, widget) {
         return GetMaterialApp(
-
           title: "Store app",
           useInheritedMediaQuery: true,
           debugShowCheckedModeBanner: false,
@@ -34,26 +33,27 @@ class MyApp extends GetView {
                   FocusManager.instance.primaryFocus!.unfocus();
                 },
                 child: MediaQuery(
-                  data: MediaQuery.of(context)
-                      .copyWith(textScaler: const TextScaler.linear(1.0)),
+                  data: MediaQuery.of(
+                    context,
+                  ).copyWith(textScaler: const TextScaler.linear(1.0)),
                   child: widget!,
                 ),
               ),
             );
           },
 
-           // initialRoute: AppPages.FLOATING_NAV,
-          initialRoute: AppPages.TESTWIDGETS,
-          // first screen to show when app is running
+          initialRoute: AppPages.FLOATING_NAV,
 
+          // initialRoute: AppPages.TESTWIDGETS,
+          // first screen to show when app is running
           defaultTransition: Transition.fadeIn,
 
           getPages: AppPages.routes,
           // app screens
           locale: MySharedPref.getCurrentLocal(),
           // app language
-          translations: LocalizationService
-              .getInstance(), // localization services in app (controller app language)
+          translations:
+              LocalizationService.getInstance(), // localization services in app (controller app language)
         );
       },
     );

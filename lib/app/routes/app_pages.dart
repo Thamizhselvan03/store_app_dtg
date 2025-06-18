@@ -13,6 +13,8 @@ import '../modules/admin/admin_main/bindings/admin_main_binding.dart';
 import '../modules/admin/admin_main/views/admin_main_view.dart';
 import '../modules/admin/inventory_tracking/bindings/inventory_tracking_binding.dart';
 import '../modules/admin/inventory_tracking/views/inventory_tracking_view.dart';
+import '../modules/admin/members_list/bindings/members_list_binding.dart';
+import '../modules/admin/members_list/views/members_list_view.dart';
 import '../modules/admin/product_management/bindings/product_management_binding.dart';
 import '../modules/admin/product_management/views/product_management_view.dart';
 import '../modules/customer/Cust_Grocery_list/bindings/cust_grocery_list_binding.dart';
@@ -67,6 +69,7 @@ class AppPages {
   static const QR_SCANNER = Routes.QR_SCANNER;
   static const CUST_NOTIFICATION = Routes.CUST_NOTIFICATION;
   static const TESTWIDGETS = Routes.TESTWIDGETS;
+  static const MEMBERS_LIST = Routes.MEMBERS_LIST;
 
   static final routes = [
     /// NAV BARs
@@ -176,6 +179,11 @@ class AppPages {
       name: _Paths.TESTWIDGETS,
       page: () => const TestwidgetsView(),
       binding: TestwidgetsBinding(),
+    ),
+    GetPage(
+      name: _Paths.MEMBERS_LIST,
+      page: () => const MembersListView(),
+      binding: MembersListBinding(),
     ),
   ];
 }

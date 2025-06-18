@@ -12,167 +12,284 @@ class TestwidgetsView extends GetView<TestwidgetsController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 64,
-        title: Text('Users', style: TextStyle(fontSize: 20)),
+        title: Text(
+          controller.isEditing.value ? 'Edit Profile' : 'User Profile',
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Get.back(),
+        ),
         actions: [
-          // IconButton(icon: Icon(Icons.search), onPressed: () => _showSearch()),
-          IconButton(icon: Icon(Icons.filter_list), onPressed: () {}),
+          Obx(() {
+            if (controller.isEditing.value) {
+              return Row(
+                children: [
+                  TextButton.icon(
+                    onPressed: () => controller.toggleEdit(),
+                    icon: Icon(Icons.save, color: Colors.white),
+                    label: Text('Save', style: TextStyle(color: Colors.white)),
+                  ),
+                  TextButton.icon(
+                    onPressed: () => controller.toggleEdit(),
+                    icon: Icon(Icons.cancel, color: Colors.white),
+                    label: Text(
+                      'Cancel',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              );
+            } else {
+              return IconButton(
+                icon: Icon(Icons.edit),
+                onPressed: () => controller.toggleEdit(),
+              );
+            }
+          }),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => controller.addUser(),
-        tooltip: 'Add User',
-        child: Icon(Icons.add),
-      ),
-      body: Column(
-        children: [
-          // Search Bar
-         Padding(padding: const EdgeInsets.all(8.0), child: _buildSearchBar()),
-          // User List
-            Expanded(
-              child: RefreshIndicator(
-                onRefresh: () async {
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16),
+        child: Obx(() {
+          final c = controller;
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Profile Picture
+              Center(
+                child: Stack(
+                  alignment: Alignment.bottomRight,
+                  children: [
+                    CircleAvatar(
+                      radius: 60,
+                      backgroundImage: NetworkImage(c.profileImageUrl.value),
+                    ),
+                    if (c.isEditing.value)
+                      Positioned(
+                        bottom: 0,
+                        right: 4,
+                        child: GestureDetector(
+                          onTap: () => c.pickImage(),
+                          child: CircleAvatar(
+                            radius: 20,
+                            backgroundColor: Colors.grey.shade200,
+                            child: Icon(Icons.camera_alt, color: Colors.black),
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
 
-                },
-                child: CustomScrollView(slivers: [
-                  SliverToBoxAdapter(child:  Obx(() {
-                    if (controller.filteredUsers.isEmpty) {
-                      return Center(child: Text('No users found'));
-                    }
-                    return ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: controller.filteredUsers.length + 1,
-                      itemBuilder: (context, index) {
-                        if (index == controller.filteredUsers.length) {
-                          // Load More Button
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Center(
-                              child: ElevatedButton(
-                                onPressed: controller.loadMore,
-                                child: Obx(
-                                      () => controller.isLoadingMore.value
-                                      ? CircularProgressIndicator(color: Colors.white)
-                                      : Text('Load More'),
+              // User Info Fields
+              Form(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Full Name
+                    TextFormField(
+                      controller: c.fullNameController,
+                      decoration: InputDecoration(
+                        labelText: 'Full Name *',
+                        border: OutlineInputBorder(),
+                      ),
+                      enabled: c.isEditing.value,
+                      validator: (v) =>
+                          v == null || v.isEmpty ? 'Enter full name' : null,
+                    ),
+                    SizedBox(height: 10),
+                    // Email
+                    TextFormField(
+                      controller: c.emailController,
+                      decoration: InputDecoration(
+                        labelText: 'Email Address *',
+                        border: OutlineInputBorder(),
+                      ),
+                      enabled: c.isEditing.value,
+                      validator: (v) {
+                        if (v == null || v.isEmpty) return 'Enter email';
+                        if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(v))
+                          return 'Invalid email';
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 10),
+                    // Phone
+                    TextFormField(
+                      controller: c.phoneController,
+                      decoration: InputDecoration(
+                        labelText: 'Phone Number *',
+                        border: OutlineInputBorder(),
+                      ),
+                      enabled: c.isEditing.value,
+                      validator: (v) =>
+                          v == null || v.isEmpty ? 'Enter phone' : null,
+                    ),
+                    SizedBox(height: 10),
+                    // Role / User Type (Dropdown)
+                    InputDecorator(
+                      decoration: InputDecoration(
+                        labelText: 'Role / User Type',
+                        border: OutlineInputBorder(),
+                      ),
+                      child: c.isEditing.value
+                          ? DropdownButtonHideUnderline(
+                              child: DropdownButton<String>(
+                                value: c.role.value,
+                                items: ['User', 'Admin', 'Moderator']
+                                    .map(
+                                      (role) => DropdownMenuItem(
+                                        value: role,
+                                        child: Text(role),
+                                      ),
+                                    )
+                                    .toList(),
+                                onChanged: (val) {
+                                  if (val != null) c.role.value = val;
+                                },
+                              ),
+                            )
+                          : Text(c.role.value),
+                    ),
+                    SizedBox(height: 10),
+                    // Status Badge / Switch
+                    Row(
+                      children: [
+                        Text(
+                          'Status: ',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        c.isEditing.value
+                            ? Switch(
+                                value: c.isActive.value,
+                                onChanged: (val) => c.isActive.value = val,
+                              )
+                            : Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 6,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: c.isActive.value
+                                      ? Colors.green
+                                      : Colors.red,
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Text(
+                                  c.isActive.value ? 'Active' : 'Inactive',
+                                  style: TextStyle(color: Colors.white),
                                 ),
                               ),
-                            ),
-                          );
-                        }
-                        final user = controller.filteredUsers[index];
-                        return _buildUserItem(user);
-                      },
-                    );
-                  }),)
-                ],),
-              ),
-            ),
-
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSearchBar() {
-    return TextField(
-      decoration: InputDecoration(
-        hintText: 'Search users...',
-        prefixIcon: Icon(Icons.search),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
-        contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
-      ),
-      onChanged: (value) {
-        controller.searchQuery.value = value;
-        controller.filterUsers();
-      },
-    );
-  }
-
-  void _showSearch() {
-    // Optional: Implement a modal search dialog
-  }
-
-  Widget _buildUserItem(User user) {
-    return Card(
-      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      elevation: 2,
-      child: ListTile(
-        leading: CircleAvatar(
-          backgroundImage: NetworkImage(user.avatarUrl),
-          radius: 25,
-        ),
-        title: Text(user.name, style: TextStyle(fontWeight: FontWeight.bold)),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              user.email,
-              style: TextStyle(color: Colors.grey[600], fontSize: 12),
-            ),
-            SizedBox(height: 4),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _buildRoleBadge(user.role),
-
-                Text(
-                  'Last login: ${user.lastLogin}',
-                  style: TextStyle(fontSize: 10, color: Colors.grey),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    // Registration Date
+                    TextFormField(
+                      initialValue: c.registrationDate.value
+                          .toLocal()
+                          .toString()
+                          .split(' ')[0],
+                      decoration: InputDecoration(
+                        labelText: 'Registration Date',
+                        border: OutlineInputBorder(),
+                      ),
+                      enabled: false,
+                    ),
+                    SizedBox(height: 10),
+                    // Last Login
+                    TextFormField(
+                      initialValue: c.lastLogin.value
+                          .toLocal()
+                          .toString()
+                          .split(' ')[0],
+                      decoration: InputDecoration(
+                        labelText: 'Last Login',
+                        border: OutlineInputBorder(),
+                      ),
+                      enabled: false,
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ],
-        ),
+              ),
 
-        // trailing: Row(
-        //   mainAxisSize: MainAxisSize.min,
-        //   children: [
-        //     IconButton(
-        //       constraints: BoxConstraints.tight(Size.fromWidth(35.w)),
-        //       icon: Icon(Icons.edit, color: Colors.blue),
-        //       onPressed: () => controller.editUser(user),
-        //     ),
-        //     IconButton(
-        //       constraints: BoxConstraints.tight(Size.fromWidth(25.w)),
-        //       icon: Icon(Icons.delete, color: Colors.red),
-        //       onPressed: () => controller.deleteUser(user),
-        //     ),
-        //   ],
-        // ),
-      ),
-    );
-  }
+              SizedBox(height: 20),
+              // Additional Details
+              Text(
+                'Additional Details',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 10),
+              // Address
+              TextFormField(
+                controller: c.addressController,
+                decoration: InputDecoration(
+                  labelText: 'Address',
+                  border: OutlineInputBorder(),
+                ),
+                enabled: c.isEditing.value,
+              ),
+              SizedBox(height: 10),
+              // Date of Birth
+              GestureDetector(
+                onTap: c.isEditing.value ? () => c.selectDate(context) : null,
+                child: AbsorbPointer(
+                  child: TextFormField(
+                    controller: c.dobController,
+                    decoration: InputDecoration(
+                      labelText: 'Date of Birth',
+                      border: OutlineInputBorder(),
+                      suffixIcon: Icon(Icons.calendar_today),
+                    ),
+                    enabled: c.isEditing.value,
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              // Notes
+              TextFormField(
+                controller: c.notesController,
+                decoration: InputDecoration(
+                  labelText: 'Notes / Description',
+                  border: OutlineInputBorder(),
+                ),
+                enabled: c.isEditing.value,
+                maxLines: 3,
+              ),
+              SizedBox(height: 20),
 
-  Widget _buildRoleBadge(String role) {
-    Color color;
-    switch (role) {
-      case 'Admin':
-        color = Colors.redAccent;
-        break;
-      case 'Cashier':
-        color = Colors.blueAccent;
-        break;
-      case 'Worker':
-        color = Colors.green;
-        break;
-      default:
-        color = Colors.grey;
-    }
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.2),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Text(
-        role,
-        style: TextStyle(
-          color: color,
-          fontSize: 12,
-          fontWeight: FontWeight.bold,
-        ),
+              // Action Buttons
+              if (c.isEditing.value)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    OutlinedButton(
+                      onPressed: () => c.toggleEdit(),
+                      child: Text('Cancel'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        // Add validation if needed
+                        c.toggleEdit();
+                      },
+                      child: Text('Save'),
+                    ),
+                  ],
+                )
+              else
+                // Activate / Deactivate toggle
+                Obx(
+                  () => SwitchListTile(
+                    title: Text(
+                      c.isActive.value ? 'Deactivate User' : 'Activate User',
+                    ),
+                    value: c.isActive.value,
+                    onChanged: (val) => c.isActive.value = val,
+                  ),
+                ),
+            ],
+          );
+        }),
       ),
     );
   }

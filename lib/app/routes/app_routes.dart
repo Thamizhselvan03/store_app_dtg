@@ -27,6 +27,7 @@ abstract class Routes {
   static const QR_SCANNER = _Paths.QR_SCANNER;
   static const CUST_NOTIFICATION = _Paths.CUST_NOTIFICATION;
   static const TESTWIDGETS = _Paths.TESTWIDGETS;
+  static const MEMBERS_LIST = _Paths.MEMBERS_LIST;
 }
 
 abstract class _Paths {
@@ -53,4 +54,5 @@ abstract class _Paths {
   static const QR_SCANNER = '/qr-scanner';
   static const CUST_NOTIFICATION = '/cust-notification';
   static const TESTWIDGETS = '/testwidgets';
+  static const MEMBERS_LIST = '/members-list';
 }

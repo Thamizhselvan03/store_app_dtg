@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:store_app/app/components/common/widgets/text_app.dart';
+import 'package:store_app/app/routes/app_pages.dart';
+import 'package:store_app/config/extensions/context_extensions.dart';
 
 import '../../admin_main/views/widgets/drawer_admin.dart';
 import '../controllers/dashboard_controller.dart';
@@ -18,7 +20,7 @@ class DashboardView extends GetView<DashboardController> {
       appBar: AppBar(
         title: const Text('Dashboard'),
         centerTitle: true,
-      //  leading: Icon(Icons.menu, color: Colors.black),
+        //  leading: Icon(Icons.menu, color: Colors.black),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
@@ -31,25 +33,32 @@ class DashboardView extends GetView<DashboardController> {
                 CircleAvatar(
                   radius: 30.r,
                   backgroundColor: context.theme.primaryColor,
-                  child: Icon(Icons.person_2_outlined, color: Colors.white),
+                  child: IconButton(
+                    onPressed: () {
+                      context.pushNamed(AppPages.MEMBERS_LIST);
+                    },
+                    icon: Icon(Icons.person_2_outlined, color: Colors.white),
+                  ),
                 ),
                 CircleAvatar(
-                  child: Icon(Icons.list_alt, color: Colors.white),
                   radius: 30.r,
                   backgroundColor: context.theme.primaryColor,
+                child:   IconButton(
+                    onPressed: () {
+                      context.pushNamed(AppPages.TESTWIDGETS);
+                    },
+                    icon: Icon(Icons.list_alt, color: Colors.white),)
                 ),
                 CircleAvatar(
+                  radius: 30.r,
+                  backgroundColor: context.theme.primaryColor,
                   child: Icon(Icons.notifications_none, color: Colors.white),
-                  radius: 30.r,
-                  backgroundColor: context.theme.primaryColor,
                 ),
 
-
-
                 CircleAvatar(
-                  child: Icon(Icons.settings, color: Colors.white),
                   radius: 30.r,
                   backgroundColor: context.theme.primaryColor,
+                  child: Icon(Icons.settings, color: Colors.white),
                 ),
               ],
             ),

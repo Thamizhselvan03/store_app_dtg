@@ -1,133 +1,90 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class TestwidgetsController extends GetxController {
   //TODO: Implement TestwidgetsController
+  var fullName = 'John Doe'.obs;
+  var email = 'john.doe@example.com'.obs;
+  var phone = '+1234567890'.obs;
+  var role = 'User'.obs;
+  var isActive = true.obs;
+  var registrationDate = DateTime(2021, 1, 15).obs;
+  var lastLogin = DateTime(2023, 8, 20).obs;
+  var address = '123 Main Street, City, Country'.obs;
+  var dob = DateTime(1990, 5, 20).obs;
+  var notes = 'Sample notes about user'.obs;
+  var profileImageUrl = 'https://via.placeholder.com/150'.obs;
+  var isEditing = false.obs;
 
-  // All users
-  final List<User> allUsers = List.generate(
-    50,
-        (index) => User(
-      name: 'User $index',
-      email: 'user$index@example.com',
-      role: index % 3 == 0 ? 'Admin' : index % 3 == 1 ? 'Cashier' : 'Worker',
-      lastLogin: '2024-04-0${index % 9 + 1}',
-      avatarUrl:
-      'https://i.pravatar.cc/150?img=${index + 1}', // Placeholder avatar
-    ),
-  );
-
-  // Observable filtered list
-  var filteredUsers = <User>[].obs;
-
-  // Search query
-  var searchQuery = ''.obs;
-
-  // Pagination control
-  int itemsPerPage = 10;
-  int currentPage = 1;
-
-  // Loading state
-  var isLoadingMore = false.obs;
+  // Text controllers for form fields
+  late TextEditingController fullNameController;
+  late TextEditingController emailController;
+  late TextEditingController phoneController;
+  late TextEditingController addressController;
+  late TextEditingController dobController;
+  late TextEditingController notesController;
 
   @override
   void onInit() {
     super.onInit();
-    filterUsers();
+    // Initialize controllers with current data
+    fullNameController = TextEditingController(text: fullName.value);
+    emailController = TextEditingController(text: email.value);
+    phoneController = TextEditingController(text: phone.value);
+    addressController = TextEditingController(text: address.value);
+    dobController = TextEditingController(text: dob.value.toLocal().toString().split(' ')[0]);
+    notesController = TextEditingController(text: notes.value);
   }
 
-  // Filter users based on search query
-  void filterUsers() {
-    List<User> temp = allUsers
-        .where((user) =>
-    user.name.toLowerCase().contains(searchQuery.value.toLowerCase()) ||
-        user.email
-            .toLowerCase()
-            .contains(searchQuery.value.toLowerCase()))
-        .toList();
-
-    // Reset pagination
-    currentPage = 1;
-    filteredUsers.value = temp.take(itemsPerPage).toList();
+  @override
+  void onClose() {
+    fullNameController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
+    addressController.dispose();
+    dobController.dispose();
+    notesController.dispose();
+    super.onClose();
   }
 
-  // Load more users (pagination)
-  void loadMore() async {
-    if (isLoadingMore.value) return;
-    isLoadingMore.value = true;
-    await Future.delayed(Duration(seconds: 1)); // Simulate delay
-
-    final start = currentPage * itemsPerPage;
-    final end = start + itemsPerPage;
-    final moreUsers = allUsers
-        .where((user) =>
-    user.name
-        .toLowerCase()
-        .contains(searchQuery.value.toLowerCase()) ||
-        user.email
-            .toLowerCase()
-            .contains(searchQuery.value.toLowerCase()))
-        .skip(start)
-        .take(itemsPerPage)
-        .toList();
-
-    if (moreUsers.isNotEmpty) {
-      filteredUsers.addAll(moreUsers);
-      currentPage++;
+  void toggleEdit() {
+    if (isEditing.value) {
+      // Save data if validation passes
+      // Here, you could add validation before saving
+      fullName.value = fullNameController.text;
+      email.value = emailController.text;
+      phone.value = phoneController.text;
+      address.value = addressController.text;
+      notes.value = notesController.text;
+      // Save other fields as needed
+    } else {
+      // When entering edit mode, update controllers
+      fullNameController.text = fullName.value;
+      emailController.text = email.value;
+      phoneController.text = phone.value;
+      addressController.text = address.value;
+      notesController.text = notes.value;
+      dobController.text = dob.value.toLocal().toString().split(' ')[0];
     }
-    isLoadingMore.value = false;
+    isEditing.value = !isEditing.value;
   }
 
-  // Add user (for demo purpose)
-  void addUser() {
-    final newUser = User(
-      name: 'New User',
-      email: 'newuser@example.com',
-      role: 'Viewer',
-      lastLogin: '2024-04-10',
-      avatarUrl: 'https://i.pravatar.cc/150?img=100',
+  Future<void> pickImage() async {
+    // Placeholder: simulate image change
+    profileImageUrl.value =
+    'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d';
+  }
+
+  Future<void> selectDate(BuildContext context) async {
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: dob.value,
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
     );
-    allUsers.insert(0, newUser);
-    filterUsers();
-  }
-
-  // Delete user
-  void deleteUser(User user) {
-    allUsers.remove(user);
-    filterUsers();
-  }
-
-  // Edit user (simple demo)
-  void editUser(User user) {
-    // For demo, just change name
-    final index = allUsers.indexOf(user);
-    if (index != -1) {
-      allUsers[index] = User(
-        name: user.name + ' (Edited)',
-        email: user.email,
-        role: user.role,
-        lastLogin: user.lastLogin,
-        avatarUrl: user.avatarUrl,
-      );
-      filterUsers();
+    if (picked != null) {
+      dob.value = picked;
+      dobController.text = picked.toLocal().toString().split(' ')[0];
     }
   }
-}
-
-
-
-// Dummy User Model
-class User {
-  final String name;
-  final String email;
-  final String role;
-  final String lastLogin;
-  final String avatarUrl;
-
-  User({
-    required this.name,
-    required this.email,
-    required this.role,
-    required this.lastLogin,
-    required this.avatarUrl,
-  });
 }
